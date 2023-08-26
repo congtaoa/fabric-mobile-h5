@@ -21,19 +21,25 @@
   align-items: center;
   justify-content: space-between;
 }
-.left-btn-view{
+.left-btn-view {
   width: 10px;
   height: 10px;
 }
 
-.see-btn{
+.image-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+.see-btn {
   border: 0;
   color: #fff;
 }
 
-.save-btn{
+.save-btn {
   color: #fff;
-  background-color: #F54;
+  background-color: #f54;
   font-size: 26px;
   line-height: 50px;
   padding: 0 30px;

@@ -6,10 +6,10 @@ import { fabric } from "fabric";
 import "./index.scss";
 import { isIPhoneX, guid, downFontByJSON, getFilter } from "../../widget/Tools";
 import { getCanvasWH } from "../../widget/util";
-import oneIcon from "../../assets/images/ex.png";
-import twoIcon from "../../assets/images/text.png";
-import threeIcon from "../../assets/images/ic.png";
-import fourIcon from "../../assets/images/add.png";
+import alIcon from "../../assets/images/al.png";
+import arIcon from "../../assets/images/ar.png";
+import alnIcon from "../../assets/images/al_normal.png";
+import arnIcon from "../../assets/images/ar_normal.png";
 import initControls from "../../core/initControls";
 import initAligningGuidelines from "../../core/initAligningGuidelines";
 import {
@@ -23,7 +23,7 @@ import TempComponent from "./temp/index";
 import TwoItemComponent from "./twoItem/index";
 import ThreeItemComponent from "./threeItem/index";
 import FourItemComponent from "./fourItem/index";
-import { fitterList } from "./twoItem/typeList";
+import { fitterList, bottomList } from "./twoItem/typeList";
 
 type ElementType = "IText" | "Image" | "Textbox";
 
@@ -34,14 +34,6 @@ const baseShapeConfig = {
     width: 90,
     fontSize: 18,
     fontFamily: "华康金刚黑",
-    stroke: null,
-    strokeWidth: 1,
-    strokeDashArray: null,
-    strokeLineCap: "butt",
-    strokeDashOffset: 0,
-    strokeLineJoin: "miter",
-    strokeUniform: false,
-    strokeMiterLimit: 1,
   },
   Image: {},
 };
@@ -56,19 +48,11 @@ const Index = () => {
   }); // 画布大小
   const workspace = useRef<fabric.Rect | null>();
 
-  const bottomList = [
-    { icon: oneIcon, name: "换模板" },
-    { icon: twoIcon, name: "换文字" },
-    { icon: threeIcon, name: "换图片" },
-    { icon: fourIcon, name: "添加" },
-  ];
-
   const [firstBtns, setFirstBtns] = useFirstBtns();
   const [, setCurrentFont] = useCurrentFont();
   const [currentTextBox, setCurrentTextBox] = useCurrentTextBox();
   const [currentImageBox, setCurrentImageBox] = useCurrentImageBox();
   const [, setFitterInfo] = useFitterImageInfo();
-
   const [imgUrlInfo, setImgUrl] = useState<{
     imgUrl: string;
     showImg: boolean;
@@ -85,6 +69,8 @@ const Index = () => {
       id: item,
     }));
   });
+  const canvasStateRef = useRef<any[]>([]);
+  const stateIndexRef = useRef<number>(-1);
 
   // 插入元素
   const insertElement = (type: ElementType, url?: any) => {
@@ -210,8 +196,6 @@ const Index = () => {
     workspace.current = canvasRef.current
       .getObjects()
       .find((item) => item.id === "workspace") as fabric.Rect;
-
-    // console.log("workspace.current", workspace.current);
     if (workspace.current) {
       setOptions({
         width: workspace.current.width,
@@ -233,9 +217,7 @@ const Index = () => {
       if (itemFilter) {
         let v = itemFilter[item.key];
         let v1 = (v * 100).toFixed(0);
-        // console.log(v1, item.key, "jin");
         obj[item.key] = v1;
-        // console.log(obj);
       }
     });
     setFitterInfo({
@@ -249,7 +231,6 @@ const Index = () => {
   };
 
   const mouseDown = (opt: any) => {
-    // 点击进入
     const activeObj = canvasRef.current.getActiveObject();
     console.log(activeObj);
     if (activeObj) {
@@ -274,15 +255,46 @@ const Index = () => {
         setFirstBtns({ showPop: true, firstIndex: 2 });
       }
     } else {
-      setFirstBtns({
-        firstIndex: -1,
-        showPop: false,
-      });
+      setFirstBtns({ firstIndex: -1, showPop: false });
     }
   };
 
   const mouseUp = (opt: any) => {
     // console.log(opt);
+  };
+
+  const canUndo = () => {
+    return stateIndexRef.current > 0;
+  };
+
+  const canRedo = () => {
+    return stateIndexRef.current < canvasStateRef.current.length - 1;
+  };
+
+  const updateCanvasState = () => {
+    const canvasAsJson = JSON.stringify(
+      canvasRef.current.toDatalessJSON(["id", "selectable", "hasControls"])
+    );
+    if (canvasStateRef.current.length == 0) {
+      canvasStateRef.current = canvasStateRef.current.concat([canvasAsJson]);
+      stateIndexRef.current = canvasStateRef.current.length - 1;
+    } else {
+      let arr = [...canvasStateRef.current];
+      arr.splice(stateIndexRef.current + 1);
+      canvasStateRef.current = arr.concat([canvasAsJson]);
+      stateIndexRef.current = canvasStateRef.current.length - 1;
+    }
+  };
+
+  const historyState = (index: number) => {
+    console.log("dd", index, canvasStateRef.current);
+    canvasRef.current.loadFromJSON(
+      JSON.parse(canvasStateRef.current[index]),
+      () => {
+        canvasRef.current.renderAll();
+        stateIndexRef.current = index;
+      }
+    );
   };
 
   useEffect(() => {
@@ -308,6 +320,8 @@ const Index = () => {
     canvasRef.current.on({
       "mouse:down": mouseDown,
       "mouse:up": mouseUp,
+      "object:modified": updateCanvasState,
+      "object:added": updateCanvasState,
     });
   }, []);
 
@@ -325,9 +339,8 @@ const Index = () => {
       imgUrl: getImgUrl(),
     });
   };
-
-   // 清空画布
-   const clear = () => {
+  // 清空画布
+  const clear = () => {
     canvasRef.current.clear();
   };
 
@@ -337,23 +350,23 @@ const Index = () => {
     const json = canvasRef.current.toDatalessJSON([
       "id",
       "selectable",
-      "hasControls"
+      "hasControls",
     ]);
-     // 存json
-     const tplsV = JSON.parse(localStorage.getItem("tpls") || "{}");
-     tplsV[id] = { json, t: val };
-     localStorage.setItem("tpls", JSON.stringify(tplsV));
-     // 存图片
-     canvasRef.current.discardActiveObject();
-     canvasRef.current.renderAll();
-     const imgUrls = getImgUrl();
-     const tplImgs = JSON.parse(localStorage.getItem("tplImgs") || "{}");
-     tplImgs[id] = imgUrls;
-     localStorage.setItem("tplImgs", JSON.stringify(tplImgs));
+    // 存json
+    const tplsV = JSON.parse(localStorage.getItem("tpls") || "{}");
+    tplsV[id] = { json, t: val };
+    localStorage.setItem("tpls", JSON.stringify(tplsV));
+    // 存图片
+    canvasRef.current.discardActiveObject();
+    canvasRef.current.renderAll();
+    const imgUrls = getImgUrl();
+    const tplImgs = JSON.parse(localStorage.getItem("tplImgs") || "{}");
+    tplImgs[id] = imgUrls;
+    localStorage.setItem("tplImgs", JSON.stringify(tplImgs));
 
-     setTpls((prev: any) => [...prev, { id, t: val }]);
+    setTpls((prev: any) => [...prev, { id, t: val }]);
 
-     Taro.showToast({ title: "模板保存成功！", icon: "success" });
+    Taro.showToast({ title: "模板保存成功！", icon: "success" });
   };
 
   // 读取模板 json
@@ -367,9 +380,8 @@ const Index = () => {
         setNewSize();
       });
     });
-    console.log(tplsV, tplsV[id].json);
+    // console.log(tplsV, tplsV[id].json);
   };
-
 
   const firstItemTap = (index: number) => {
     switch (index) {
@@ -435,8 +447,25 @@ const Index = () => {
         <View className="head-top-view">
           <View className="left-btn-view"></View>
           <View className="head-row-item-r">
+            <Image
+              className="image-icon"
+              src={canUndo() ? alIcon : alnIcon}
+              onClick={() => {
+                if (stateIndexRef.current == 0) return;
+                historyState(stateIndexRef.current - 1);
+              }}
+            />
+            <Image
+              className="image-icon"
+              src={canRedo() ? arIcon : arnIcon}
+              onClick={() => {
+                if (stateIndexRef.current == canvasStateRef.current.length - 1)
+                  return;
+                historyState(stateIndexRef.current + 1);
+              }}
+            />
             <AtButton
-              className="mr-2 see-btn"
+              className="ml-1 mr-2 see-btn"
               size="small"
               onClick={handlePreview}
             >

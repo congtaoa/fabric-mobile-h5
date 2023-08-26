@@ -1,3 +1,16 @@
+import oneIcon from "../../../../assets/images/ex.png";
+import twoIcon from "../../../../assets/images/text.png";
+import threeIcon from "../../../../assets/images/ic.png";
+import fourIcon from "../../../../assets/images/add.png";
+
+export const bottomList = [
+  { icon: oneIcon, name: "换模板" },
+  { icon: twoIcon, name: "换文字" },
+  { icon: threeIcon, name: "换图片" },
+  { icon: fourIcon, name: "添加" },
+];
+
+
 export const colors = [
   "transparent",
   "#000",
