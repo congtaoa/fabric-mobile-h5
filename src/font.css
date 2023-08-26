@@ -1,0 +1,20 @@
+@font-face{
+  font-family: '汉体';
+  src : url('./assets/font/汉体.ttf');
+}
+
+@font-face{
+  font-family: '华康金刚黑';
+  src : url('./assets/font/华康金刚黑.ttf');
+}
+
+@font-face{
+  font-family: '造字工房云川体';
+  src : url('./assets/font/造字工房云川体.ttf');
+}
+
+
+@font-face{
+  font-family: '锐字潮牌真言';
+  src : url('./assets/font/锐字潮牌真言.ttf');
+}

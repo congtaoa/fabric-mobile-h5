@@ -1,0 +1,123 @@
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/divider.scss";
+@import "~taro-ui/dist/style/components/activity-indicator.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/loading.scss";
+@import "~taro-ui/dist/style/components/float-layout.scss";
+@import "~taro-ui/dist/style/components/flex.scss";
+@import "~taro-ui/dist/style/components/slider.scss";
+@import "~taro-ui/dist/style/components/curtain.scss";
+
+page {
+  height: 100%;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  /*文本不会换行*/
+  white-space: nowrap;
+  /*当文本溢出包含元素时，以省略号表示超出的文本*/
+  text-overflow: ellipsis;
+}
+
+.mt-1 {
+  margin-top: 20px;
+}
+
+.mb-1{
+  margin-bottom: 20px;
+}
+
+.mt-2 {
+  margin-top: 40px;
+}
+
+.mb-2{
+  margin-bottom: 40px;
+}
+
+.mb-3{
+  margin-bottom: 60px;
+}
+
+.mt-3 {
+  margin-top: 60px;
+}
+
+.mt-4 {
+  margin-top: 80px;
+}
+
+.ml-1{
+  margin-left: 20px;
+}
+
+.ml-2{
+  margin-left: 40px;
+}
+
+
+.ml-3 {
+  margin-left: 60px;
+}
+
+.mr-2 {
+  margin-right: 20px;
+}
+
+.mr-3 {
+  margin-right: 60px;
+}
+
+.d-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.d-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.just-b{
+  justify-content: space-between;
+}
+
+.just-a{
+  justify-content: space-around;
+}
+
+.just-c{
+  justify-content: center;
+}
+
+// taro-ui
+.at-float-layout .layout-body{
+  background-color: #333;
+  min-height: 250px;
+  max-height: 70vh;
+}
+
+.at-float-layout__container{
+  background-color: #333;
+  min-height: 300px;
+  max-height: 75vh;
+}
+
+.at-float-layout .layout-body__content{
+  min-height: 240px;
+  max-height: 70vh;
+}
+
+.at-curtain__container{
+  width: 100%;
+}
+
+:root:root {
+  --rv-button-primary-background-color: #267ab6;
+  --rv-button-primary-border-color: #267ab6;
+  --rv-tabs-nav-background-color: #000;
+}
+

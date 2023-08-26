@@ -1,0 +1,119 @@
+.two-item-com {
+  // height: 280px;
+  background-color: #111;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.bottom-item-child-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+}
+
+.scroll-x-view {
+  width: 100vw;
+  white-space: nowrap;
+  padding: 0 30px;
+}
+
+.bottom-item-child-img {
+  width: 44px;
+  height: 44px;
+}
+
+.bottom-item-child-title {
+  color: #fff;
+  font-size: 26px;
+  margin-top: 8px;
+}
+
+.title-font-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  .btn-des {
+    margin: 0 20px;
+    font-size: 30px;
+    color: #fff;
+  }
+}
+
+.color-dot-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.color-dot-view2 {
+  border-style: solid;
+  border-width: 3px;
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-dots {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
+
+.slider-item-view-common{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 120px;
+}
+
+.font-view-scroll {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.font-list-item {
+  margin: 5px 10vw;
+}
+
+.slider-item-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 100px 2vw;
+}
+
+.comm-slider-title {
+  color: #eee;
+  font-size: 24px;
+}
+
+.arrow-item-view-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 50px;
+}

@@ -1,0 +1,13 @@
+{
+  "extends": ["taro/react"],
+  "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "jsx-quotes": ["error", "prefer-double"],
+    "react/no-unused-state": "off",
+    "react-hooks/rules-of-hooks": "error", // 检查 Hook 的规则
+    "react-hooks/exhaustive-deps": "off", // 检查 effect 的依赖
+    "react/forbid-elements": [1, { "forbid": [{ "element": "li" }] }],
+    "no-restricted-globals": ["error", "event", "fdescribe"]
+  }
+}
