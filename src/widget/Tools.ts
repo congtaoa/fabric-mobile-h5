@@ -17,9 +17,6 @@ export const isSpecial = (n: number | string): boolean => {
   return false;
 };
 
-// let ran = navigator.userAgent
-// let isAndroid = ran.indexOf('Android') > -1 || ran.indexOf('Linux') > -1
-// let isIOS = !!ran.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 
 export const getNavHeight = (): number => {
   const systemInfo = getSystemInfo();
@@ -253,3 +250,41 @@ export function downFontByJSON(str) {
   });
   return Promise.all(fontFamilysAll);
 }
+
+/**
+ * Get applied filter instance
+ * @param {fabric.Image} sourceImg - Source image to apply filter
+ * @param {string} type - Filter type
+ * @returns {Object} Fabric object of filter
+ * @private
+ */
+export const getFilter = (sourceImg, type) => {
+  let imgFilter = null;
+
+  if (sourceImg) {
+    const fabricType = getFabricFilterType(type);
+    const { length } = sourceImg.filters;
+    let item, i;
+
+    for (i = 0; i < length; i += 1) {
+      item = sourceImg.filters[i];
+      if (item.type === fabricType) {
+        imgFilter = item;
+        break;
+      }
+    }
+  }
+
+  return imgFilter;
+};
+
+/**
+ * Change filter class name to fabric's, especially capitalizing first letter
+ * @param {string} type - Filter type
+ * @example
+ * 'grayscale' -> 'Grayscale'
+ * @returns {string} Fabric filter class name
+ */
+export const getFabricFilterType = (type) => {
+  return type.charAt(0).toUpperCase() + type.slice(1);
+};

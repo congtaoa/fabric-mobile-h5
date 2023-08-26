@@ -40,8 +40,8 @@ const TranComponent: FC<TranChildrenType> = ({
   };
 
   return (
-    <AtFloatLayout key="style" isOpened={show} onClose={onClose}>
-      <View className="at-row at-row__justify--center mb-2">
+    <AtFloatLayout key="tran" isOpened={show} onClose={onClose}>
+      <View className="at-row at-row__justify--center">
         <Text style={{ fontSize: "16px", color: "#fff" }}>不透明度</Text>
       </View>
       <View className="slider-item-view-common">
@@ -70,7 +70,6 @@ const TranComponent: FC<TranChildrenType> = ({
             }
             backgroundColor="#8a8a8a"
             onChanging={(v) => {
-              updateAttr("opacity", (v / 100).toFixed(2));
               if (typeKey === "Image") {
                 setCurrentImageBox({
                   ...currentImageBox,
@@ -82,6 +81,7 @@ const TranComponent: FC<TranChildrenType> = ({
                   opacity: (v / 100).toFixed(2),
                 });
               }
+              requestAnimationFrame(() => updateAttr("opacity", (v / 100).toFixed(2)));
             }}
           />
         </View>

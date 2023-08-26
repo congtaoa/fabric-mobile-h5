@@ -3,16 +3,10 @@ import { View, Text } from "@tarojs/components";
 import { AtFloatLayout } from "taro-ui";
 import "../../twoItem/index.scss";
 import { isIPhoneX } from "../../../../widget/Tools";
-import { iosFonts } from "../typeList/index";
+import { CommonCanvasChildrenType, iosFonts } from "../typeList/index";
 import { useCurrentTextBox, useCurrentFont } from "../../../../hooks/useIndexState";
 
-export interface FontChildrenType {
-  show: boolean;
-  onClose: () => void;
-  canvasRef: any;
-}
-
-const FontComponent: FC<FontChildrenType> = ({
+const FontComponent: FC<CommonCanvasChildrenType> = ({
   show,
   onClose,
   canvasRef

@@ -33,3 +33,21 @@ export const useCurrentImageBox = createHook<{
   opacity?: string;
 }>({  opacity: "1" });
 
+// 图片滤镜
+export const useFitterImageInfo = createHook<{
+  blur: number;
+  grayscale: number;
+  brightness: number;
+  contrast: number;
+  rotation: number;
+  saturation: number;
+}>({
+  blur: 0,
+  grayscale: 0,
+  brightness: 0,
+  contrast: 0,
+  rotation: 0,
+  saturation: 0,
+});
+
+

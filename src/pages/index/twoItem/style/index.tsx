@@ -9,14 +9,9 @@ import xA from "../../../../assets/images/x_a.png";
 import uIcon from "../../../../assets/images/u.png";
 import uA from "../../../../assets/images/u_a.png";
 import { useCurrentTextBox } from "../../../../hooks/useIndexState";
+import { CommonCanvasChildrenType } from "../typeList";
 
-export interface StyleChildrenType {
-  show: boolean;
-  onClose: () => void;
-  canvasRef: any;
-}
-
-const StyleComponent: FC<StyleChildrenType> = ({
+const StyleComponent: FC<CommonCanvasChildrenType> = ({
   show,
   onClose,
   canvasRef,
@@ -138,7 +133,7 @@ const StyleComponent: FC<StyleChildrenType> = ({
             backgroundColor="#8a8a8a"
             value={currentTextBox?.fontSize}
             onChanging={(v) => {
-              updateAttr("fontSize", v);
+              requestAnimationFrame(() => updateAttr("fontSize", v));
             }}
           />
         </View>

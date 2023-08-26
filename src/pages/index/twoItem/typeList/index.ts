@@ -22,5 +22,25 @@ export const colors = [
   "#abc",
 ];
 // 字体
-export const iosFonts = [ "华康金刚黑", "汉体", "造字工房云川体", "锐字潮牌真言"];
+export const iosFonts = [
+  "华康金刚黑",
+  "汉体",
+  "造字工房云川体",
+  "锐字潮牌真言",
+];
 
+// 滤镜
+export const fitterList = [
+  { name: "模糊", key: "blur", type: "Blur" },
+  { name: "灰度", key: "grayscale", type: "Grayscale" },
+  { name: "亮度", key: "brightness", type: "Brightness" },
+  { name: "对比度", key: "contrast", type: "Contrast" },
+  { name: "色相", key: "rotation", type: "Rotation" },
+  { name: "饱和度", key: "saturation", type: "Saturation" },
+];
+
+export interface CommonCanvasChildrenType {
+  show: boolean;
+  canvasRef: any;
+  onClose: () => void;
+}

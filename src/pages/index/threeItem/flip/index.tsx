@@ -4,14 +4,13 @@ import { AtFloatLayout } from "taro-ui";
 import "../../twoItem/index.scss";
 import icon5 from "../../../../assets/images/hf.png";
 import icon6 from "../../../../assets/images/vf.png";
+import { CommonCanvasChildrenType } from "../../twoItem/typeList";
 
-export interface LayerChildrenType {
-  show: boolean;
-  canvasRef: any;
-  onClose: () => void;
-}
-
-const FlipComponent: FC<LayerChildrenType> = ({ show, canvasRef, onClose }) => {
+const FlipComponent: FC<CommonCanvasChildrenType> = ({
+  show,
+  canvasRef,
+  onClose,
+}) => {
   const flipList = [
     { icon: icon5, name: "水平翻转" },
     { icon: icon6, name: "垂直翻转" },
@@ -20,12 +19,12 @@ const FlipComponent: FC<LayerChildrenType> = ({ show, canvasRef, onClose }) => {
   const flipTap = (index: number) => {
     const activeObj = canvasRef.getActiveObject();
     switch (index) {
-      case 1:
+      case 0:
         activeObj.set({
           flipY: !activeObj.flipY,
         });
         break;
-      case 2:
+      case 1:
         activeObj.set({
           flipX: !activeObj.flipX,
         });
@@ -37,13 +36,13 @@ const FlipComponent: FC<LayerChildrenType> = ({ show, canvasRef, onClose }) => {
   };
 
   return (
-    <AtFloatLayout key="style" isOpened={show} onClose={onClose}>
+    <AtFloatLayout key="flip" isOpened={show} onClose={onClose}>
       <View className="arrow-item-view-row">
         {flipList.map((item: any, index: number) => (
           <View
             className="bottom-item-child-col"
             key={item.name}
-            onClick={() => flipTap(index + 1)}
+            onClick={() => flipTap(index)}
           >
             <Image src={item.icon} className="bottom-item-child-img" />
             <Text className="bottom-item-child-title">{item.name}</Text>

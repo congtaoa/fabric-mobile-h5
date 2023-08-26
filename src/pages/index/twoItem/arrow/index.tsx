@@ -6,14 +6,9 @@ import icon1 from "../../../../assets/images/left.png";
 import icon2 from "../../../../assets/images/up.png";
 import icon3 from "../../../../assets/images/right.png";
 import icon4 from "../../../../assets/images/down.png";
+import { CommonCanvasChildrenType } from "../typeList";
 
-export interface ArrowChildrenType {
-  show: boolean;
-  canvasRef: any;
-  onClose: () => void;
-}
-
-const ArrowComponent: FC<ArrowChildrenType> = ({
+const ArrowComponent: FC<CommonCanvasChildrenType> = ({
   show,
   canvasRef,
   onClose,
@@ -59,7 +54,7 @@ const ArrowComponent: FC<ArrowChildrenType> = ({
   };
 
   return (
-    <AtFloatLayout key="style" isOpened={show} onClose={onClose}>
+    <AtFloatLayout key="arrow" isOpened={show} onClose={onClose}>
       <View className="arrow-item-view-row">
         {list.map((item: any, index: number) => (
           <View

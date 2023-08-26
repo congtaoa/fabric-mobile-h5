@@ -4,7 +4,7 @@ import { View, Text, Image } from "@tarojs/components";
 import { AtButton, AtCurtain } from "taro-ui";
 import { fabric } from "fabric";
 import "./index.scss";
-import { isIPhoneX, guid, downFontByJSON } from "../../widget/Tools";
+import { isIPhoneX, guid, downFontByJSON, getFilter } from "../../widget/Tools";
 import { getCanvasWH } from "../../widget/util";
 import oneIcon from "../../assets/images/ex.png";
 import twoIcon from "../../assets/images/text.png";
@@ -17,11 +17,13 @@ import {
   useCurrentFont,
   useCurrentTextBox,
   useCurrentImageBox,
+  useFitterImageInfo,
 } from "../../hooks/useIndexState";
 import TempComponent from "./temp/index";
 import TwoItemComponent from "./twoItem/index";
 import ThreeItemComponent from "./threeItem/index";
 import FourItemComponent from "./fourItem/index";
+import { fitterList } from "./twoItem/typeList";
 
 type ElementType = "IText" | "Image" | "Textbox";
 
@@ -65,6 +67,7 @@ const Index = () => {
   const [, setCurrentFont] = useCurrentFont();
   const [currentTextBox, setCurrentTextBox] = useCurrentTextBox();
   const [currentImageBox, setCurrentImageBox] = useCurrentImageBox();
+  const [, setFitterInfo] = useFitterImageInfo();
 
   const [imgUrlInfo, setImgUrl] = useState<{
     imgUrl: string;
@@ -222,6 +225,29 @@ const Index = () => {
     setZoomAuto(1);
   };
 
+  const setSliderFitterValue = () => {
+    const activeObj = canvasRef.current.getActiveObject();
+    let obj: any = {};
+    fitterList.forEach((item) => {
+      let itemFilter: any = getFilter(activeObj, item.type);
+      if (itemFilter) {
+        let v = itemFilter[item.key];
+        let v1 = (v * 100).toFixed(0);
+        // console.log(v1, item.key, "jin");
+        obj[item.key] = v1;
+        // console.log(obj);
+      }
+    });
+    setFitterInfo({
+      blur: obj?.blur ?? 0,
+      grayscale: obj?.grayscale ?? 0,
+      brightness: obj?.brightness ?? 0,
+      contrast: obj?.contrast ?? 0,
+      rotation: obj?.rotation ?? 0,
+      saturation: obj?.saturation ?? 0,
+    });
+  };
+
   const mouseDown = (opt: any) => {
     // 点击进入
     const activeObj = canvasRef.current.getActiveObject();
@@ -244,6 +270,7 @@ const Index = () => {
         setFirstBtns({ showPop: true, firstIndex: 1 });
       } else if (["image", "clipImage"].includes(activeObj.get("type"))) {
         setCurrentImageBox({ ...currentImageBox, opacity: activeObj.opacity });
+        setSliderFitterValue();
         setFirstBtns({ showPop: true, firstIndex: 2 });
       }
     } else {

@@ -19,13 +19,13 @@ const BaseDemo = memo((props: any) => {
             <Image
               key={item.id}
               src={item.img}
-              style={{ width: "30vw", height: "48vw" }}
+              style={{ width: "31.3vw", height: "48vw" }}
               onClick={() => props.itemTap(item)}
             />
           ))}
         </View>
       ) : (
-        null
+        <View className="empty-text">暂无模板...</View>
       )}
     </>
   );
@@ -46,6 +46,7 @@ const TempComponent: FC<TempChildrenType> = ({
   return (
     <AtFloatLayout key="color" isOpened={show} onClose={onClose}>
       <View className="demo-list">
+        <View className="demo-list-title">模板</View>
         <BaseDemo list={localList} itemTap={(i) => tempItemTap(i)} />
       </View>
     </AtFloatLayout>

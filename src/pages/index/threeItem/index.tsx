@@ -9,11 +9,13 @@ import icon4 from "../../../assets/images/fz1.png";
 import icon7 from "../../../assets/images/copy.png";
 import icon8 from "../../../assets/images/mul.png";
 import icon9 from "../../../assets/images/jian.png";
+import icon10 from "../../../assets/images/lvj.png";
 import { isIPhoneX } from "../../../widget/Tools";
 import FlipComponent from "./flip";
 import ArrowComponent from "../twoItem/arrow";
 import LayerComponent from "../twoItem/layer";
 import TranComponent from "../twoItem/transparent";
+import FitterComponent from "./fitter";
 
 const ThreeItemComponent: FC<{
   canvasRef: any;
@@ -22,12 +24,14 @@ const ThreeItemComponent: FC<{
     { icon: icon7, name: "复制" },
     { icon: icon1, name: "换图" },
     { icon: icon9, name: "裁剪" },
+    { icon: icon10, name: "滤镜" },
     { icon: icon8, name: "图层" },
     { icon: icon4, name: "翻转" },
     { icon: icon3, name: "透明度" },
     { icon: icon2, name: "微调" },
   ];
 
+  const [showFitter, setShowFitter] = useState<boolean>(false);
   const [showSmall, setSmall] = useState<boolean>(false);
   const [showFlip, setShowFlip] = useState<boolean>(false);
   const [showLayer, setShowLayer] = useState<boolean>(false);
@@ -97,18 +101,22 @@ const ThreeItemComponent: FC<{
         break;
         break;
       case 2:
-        // setShowStyle({ ...showStyle, showVisible: true });
+        // 裁剪
         break;
       case 3:
-        setShowLayer(true);
+        // 滤镜
+        setShowFitter(true);
         break;
       case 4:
-        setShowFlip(true);
+        setShowLayer(true);
         break;
       case 5:
-        setOpacity(true);
+        setShowFlip(true);
         break;
       case 6:
+        setOpacity(true);
+        break;
+      case 7:
         setSmall(true);
         break;
       default:
@@ -158,6 +166,11 @@ const ThreeItemComponent: FC<{
         <FlipComponent
           show={showFlip}
           onClose={() => setShowFlip(false)}
+          canvasRef={canvasRef}
+        />
+        <FitterComponent
+          show={showFitter}
+          onClose={() => setShowFitter(false)}
           canvasRef={canvasRef}
         />
       </View>
