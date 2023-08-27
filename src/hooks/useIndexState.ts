@@ -25,7 +25,7 @@ export const useCurrentTextBox = createHook<{
   isXieTi?: string;
   underline?: boolean;
   opacity?: string;
-}>({ familyValue: "", color: "", fontSize: 18, isBold: "", isXieTi: "", underline: false, opacity: "1" }); // 当前选中文字
+}>({ familyValue: "", color: "", fontSize: 20, isBold: "", isXieTi: "", underline: false, opacity: "1" }); // 当前选中文字
 
 
 // 当先选中object img
@@ -35,18 +35,16 @@ export const useCurrentImageBox = createHook<{
 
 // 图片滤镜
 export const useFitterImageInfo = createHook<{
-  blur: number;
-  grayscale: number;
-  brightness: number;
-  contrast: number;
-  rotation: number;
-  saturation: number;
+  blur: number | string;
+  grayscale: number | string;
+  brightness: number | string;
+  contrast: number | string;
+  saturation: number | string;
 }>({
   blur: 0,
   grayscale: 0,
   brightness: 0,
   contrast: 0,
-  rotation: 0,
   saturation: 0,
 });
 

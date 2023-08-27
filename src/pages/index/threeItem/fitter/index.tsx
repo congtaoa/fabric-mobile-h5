@@ -71,9 +71,6 @@ const FitterComponent: FC<CommonCanvasChildrenType> = ({
         applyFilterChange(parseFloat(v), "Contrast", "contrast");
         break;
       case 4:
-        applyFilterChange(parseFloat(v), "HueRotation", "rotation");
-        break;
-      case 5:
         applyFilterChange(parseFloat(v), "Saturation", "saturation");
         break;
       default:
@@ -107,7 +104,7 @@ const FitterComponent: FC<CommonCanvasChildrenType> = ({
                 activeColor="#fff"
                 showValue
                 backgroundColor="#8a8a8a"
-                value={fitterInfo?.[item.key]}
+                value={parseFloat(fitterInfo?.[item.key])}
                 onChanging={(v) => {
                   requestAnimationFrame(() => changeFitter(v, index));
                 }}

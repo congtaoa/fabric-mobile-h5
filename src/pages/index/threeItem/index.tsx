@@ -72,17 +72,10 @@ const ThreeItemComponent: FC<{
       case 1:
         Taro.chooseImage({
           count: 1,
-          sizeType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
+          sizeType: ["compressed"], // 可以指定是原图还是压缩图，默认二者都有
           sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有，在H5浏览器端支持使用 `user` 和 `environment`分别指定为前后摄像头
           success: function (res) {
             // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-            // 方式一
-            // 上面的实现方式，如果是在纯前端的环境下，保存时背景图是地址是本地地址( 'blob:http://192.168.1.4:10086/3b64aab5-df0e-4ed2-affc-791f8a52c346' )。
-            // 这样不是很好，如果在别的电脑想通过 反序列化 渲染出来的时候，可能会出现问题
-            // const tempFilePaths = res.tempFilePaths;
-            // insertElement("Image", tempFilePaths[0]);
-
-            // 方式二 可以将file 图片转成 base64 再生成背景图。
             const tempFiles = res.tempFiles;
             if (tempFiles[0].originalFileObj) {
               const reader = new FileReader();

@@ -32,7 +32,7 @@ const baseShapeConfig = {
     text: "创客贴",
     fill: "#06c",
     width: 90,
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: "华康金刚黑",
   },
   Image: {},
@@ -225,7 +225,6 @@ const Index = () => {
       grayscale: obj?.grayscale ?? 0,
       brightness: obj?.brightness ?? 0,
       contrast: obj?.contrast ?? 0,
-      rotation: obj?.rotation ?? 0,
       saturation: obj?.saturation ?? 0,
     });
   };
@@ -263,31 +262,18 @@ const Index = () => {
     // console.log(opt);
   };
 
-  const canUndo = () => {
-    return stateIndexRef.current > 0;
-  };
-
-  const canRedo = () => {
-    return stateIndexRef.current < canvasStateRef.current.length - 1;
-  };
-
   const updateCanvasState = () => {
     const canvasAsJson = JSON.stringify(
-      canvasRef.current.toDatalessJSON(["id", "selectable", "hasControls"])
+      canvasRef.current.toJSON(["id", "selectable", "hasControls"])
     );
-    if (canvasStateRef.current.length == 0) {
-      canvasStateRef.current = canvasStateRef.current.concat([canvasAsJson]);
-      stateIndexRef.current = canvasStateRef.current.length - 1;
-    } else {
-      let arr = [...canvasStateRef.current];
-      arr.splice(stateIndexRef.current + 1);
-      canvasStateRef.current = arr.concat([canvasAsJson]);
-      stateIndexRef.current = canvasStateRef.current.length - 1;
-    }
+    canvasStateRef.current.splice(stateIndexRef.current + 1);
+    canvasStateRef.current.push(canvasAsJson);
+    stateIndexRef.current = canvasStateRef.current.length - 1;
+    console.log("up", canvasStateRef.current, stateIndexRef.current);
   };
 
   const historyState = (index: number) => {
-    console.log("dd", index, canvasStateRef.current);
+    console.log("dd", index, canvasStateRef.current, stateIndexRef.current);
     canvasRef.current.loadFromJSON(
       JSON.parse(canvasStateRef.current[index]),
       () => {
@@ -363,9 +349,7 @@ const Index = () => {
     const tplImgs = JSON.parse(localStorage.getItem("tplImgs") || "{}");
     tplImgs[id] = imgUrls;
     localStorage.setItem("tplImgs", JSON.stringify(tplImgs));
-
     setTpls((prev: any) => [...prev, { id, t: val }]);
-
     Taro.showToast({ title: "模板保存成功！", icon: "success" });
   };
 
@@ -395,7 +379,7 @@ const Index = () => {
       case 2:
         Taro.chooseImage({
           count: 1,
-          sizeType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
+          sizeType: ["compressed"], // 可以指定是原图还是压缩图，默认二者都有
           sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有，在H5浏览器端支持使用 `user` 和 `environment`分别指定为前后摄像头
           success: function (res) {
             // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -449,7 +433,7 @@ const Index = () => {
           <View className="head-row-item-r">
             <Image
               className="image-icon"
-              src={canUndo() ? alIcon : alnIcon}
+              src={stateIndexRef.current > 0 ? alIcon : alnIcon}
               onClick={() => {
                 if (stateIndexRef.current == 0) return;
                 historyState(stateIndexRef.current - 1);
@@ -457,10 +441,13 @@ const Index = () => {
             />
             <Image
               className="image-icon"
-              src={canRedo() ? arIcon : arnIcon}
+              src={
+                stateIndexRef.current < canvasStateRef.current.length - 1
+                  ? arIcon
+                  : arnIcon
+              }
               onClick={() => {
-                if (stateIndexRef.current == canvasStateRef.current.length - 1)
-                  return;
+                if (stateIndexRef.current == canvasStateRef.current.length - 1) return;
                 historyState(stateIndexRef.current + 1);
               }}
             />

@@ -48,7 +48,6 @@ export const fitterList = [
   { name: "灰度", key: "grayscale", type: "Grayscale" },
   { name: "亮度", key: "brightness", type: "Brightness" },
   { name: "对比度", key: "contrast", type: "Contrast" },
-  { name: "色相", key: "rotation", type: "Rotation" },
   { name: "饱和度", key: "saturation", type: "Saturation" },
 ];
 
