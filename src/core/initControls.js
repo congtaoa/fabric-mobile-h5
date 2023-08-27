@@ -21,6 +21,31 @@ img4.src = rotateImg;
 const img5 = document.createElement('img');
 img5.src = deleteIcon;
 
+
+//头部描述
+function renderImgText(ctx, left, top, styleOverride, fabricObject) {
+  ctx.save();
+  ctx.translate(left, top);
+  ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+  ctx.fillText('双指进行缩放', -30, 0);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = "#777"
+  ctx.restore();
+}
+
+function renderText(ctx, left, top, styleOverride, fabricObject) {
+  console.log(ctx, 's')
+  ctx.save();
+  ctx.translate(left, top);
+  ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+  ctx.fillText("双击进行编辑", -30, 0);
+  ctx.fillStyle = "#F33"
+  ctx.fill()
+  ctx.restore();
+}
+
+
 // 两边中间图标
 function renderIcon(ctx, left, top, styleOverride, fabricObject) {
   const wsize = 20;
@@ -167,6 +192,17 @@ function initControls(canvas) {
     render: renderIconEdge
   });
 
+  fabric.Object.prototype.controls.mt = new fabric.Control({
+    x: 0,
+    y: -0.5,
+    offsetY: - 15,
+    offsetX: 0,
+    cursorStyle: 'pointer',
+    cursorStyleHandler: fabric.controlsUtils.rotationStyleHandler,
+    render: renderImgText,
+    cornerSize: 24
+  });
+
   fabric.Object.prototype.controls.mtr = new fabric.Control({
     x: 0,
     y: 0.5,
@@ -194,8 +230,9 @@ function initControls(canvas) {
   fabric.Object.prototype.set({
     transparentCorners: false,
     borderColor: '#51B9F9',
-    cornerColor: '#FFF',
+    cornerColor: '#909090',
     borderScaleFactor: 2.5,
+    padding: 6,
     cornerStyle: 'circle',
     cornerStrokeColor: '#0E98FC',
     borderOpacityWhenMoving: 1
@@ -224,6 +261,17 @@ function initControls(canvas) {
     actionHandler: fabric.controlsUtils.changeWidth,
     actionName: 'resizing',
     render: renderIcon
+  });
+
+  textBoxControls.mt = new fabric.Control({
+    x: 0,
+    y: -0.5,
+    offsetY: -15,
+    offsetX: 0,
+    cursorStyleHandler: fabric.controlsUtils.scaleSkewCursorStyleHandler,
+    actionHandler: fabric.controlsUtils.changeWidth,
+    actionName: 'resizing',
+    render: renderText
   });
 
   textBoxControls.mr = new fabric.Control({

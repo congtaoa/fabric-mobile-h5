@@ -29,9 +29,9 @@ type ElementType = "IText" | "Image" | "Textbox";
 
 const baseShapeConfig = {
   Textbox: {
-    text: "创客贴",
+    text: "双击输入文字",
     fill: "#06c",
-    width: 90,
+    width: 150,
     fontSize: 20,
     fontFamily: "华康金刚黑",
   },
@@ -78,7 +78,7 @@ const Index = () => {
     if (type === "Textbox") {
       shape = new fabric[type](guid(), {
         ...baseShapeConfig[type],
-        left: size[0] / 2 - 45,
+        left: size[0] / 2 - 75,
         top: size[1] / 2 - 20,
       });
       setCurrentFont(shape.fontFamily);
@@ -231,10 +231,9 @@ const Index = () => {
 
   const mouseDown = (opt: any) => {
     const activeObj = canvasRef.current.getActiveObject();
-    console.log(activeObj);
     if (activeObj) {
       // 如果是文字
-      console.log(activeObj.get("type"));
+      // console.log(activeObj.get("type"));
       if (activeObj.get("type") == "textbox") {
         setCurrentFont(activeObj.fontFamily);
         setCurrentTextBox({
@@ -269,11 +268,11 @@ const Index = () => {
     canvasStateRef.current.splice(stateIndexRef.current + 1);
     canvasStateRef.current.push(canvasAsJson);
     stateIndexRef.current = canvasStateRef.current.length - 1;
-    console.log("up", canvasStateRef.current, stateIndexRef.current);
+    // console.log("up", canvasStateRef.current, stateIndexRef.current);
   };
 
   const historyState = (index: number) => {
-    console.log("dd", index, canvasStateRef.current, stateIndexRef.current);
+    // console.log("dd", index, canvasStateRef.current, stateIndexRef.current);
     canvasRef.current.loadFromJSON(
       JSON.parse(canvasStateRef.current[index]),
       () => {

@@ -1,6 +1,5 @@
 import { createHook } from "../widget/Hookleton";
 
-export const useUserInfo = createHook<any>();
 
 export const useCanvasBg = createHook<string>("#fff")
 
