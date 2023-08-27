@@ -28,20 +28,17 @@ function renderImgText(ctx, left, top, styleOverride, fabricObject) {
   ctx.translate(left, top);
   ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
   ctx.fillText('双指进行缩放', -30, 0);
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillStyle = "#777"
+  // ctx.textAlign = 'center';
+  // ctx.textBaseline = 'middle';
+  // ctx.fillStyle = "#777"
   ctx.restore();
 }
 
 function renderText(ctx, left, top, styleOverride, fabricObject) {
-  console.log(ctx, 's')
   ctx.save();
   ctx.translate(left, top);
   ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
   ctx.fillText("双击进行编辑", -30, 0);
-  ctx.fillStyle = "#F33"
-  ctx.fill()
   ctx.restore();
 }
 
