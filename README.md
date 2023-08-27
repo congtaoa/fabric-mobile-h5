@@ -8,12 +8,15 @@
 *  全局React Hooks组件式开发
 
 
-
-![预览1](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2d83a9b58474655903e1abd1f67ce10~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=352&h=762&e=gif&f=508&b=fefefe)
-
+![预览1](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0288b9f42bd4ccbb2c3cbd6db3031a0~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=722&h=1470&e=png&b=1c1c1c)
 
 
-![n2.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9311389a1ef4431a95557739b65c68f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=360&h=744&e=gif&f=785&b=1a1a1a)
+
+![预览2](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2d83a9b58474655903e1abd1f67ce10~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=352&h=762&e=gif&f=508&b=fefefe)
+
+
+
+![预览3](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9311389a1ef4431a95557739b65c68f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=360&h=744&e=gif&f=785&b=1a1a1a)
 
 ## 已有功能
 
@@ -63,4 +66,3 @@ pnpm run build:h5
 *   [ ] 画布手势缩放
 *   [ ] 图片裁剪
 *   [ ] 字体大小优化
-
