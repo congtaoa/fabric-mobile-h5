@@ -7,13 +7,11 @@
 *  Taro(3.6.13)环境目前只适配了h5模式。
 *  全局React Hooks组件式开发
 
-![预览1](https://github.com/congtaoa/fabric-mobile-h5/assets/18671378/b4496f6e-d92c-477d-b1de-59c62102a30a)
+![预览1](https://github.com/congtaoa/fabric-mobile-h5/assets/18671378/18a13e63-08de-4de7-a5ab-bf436ba16652)
 
-![预览2](https://github.com/congtaoa/fabric-mobile-h5/assets/18671378/28d4c7d3-d7e2-4527-90bd-bf52a5391738)
+![预览2](https://github.com/congtaoa/fabric-mobile-h5/assets/18671378/3e33c6ae-9579-47cb-82b9-4fcf71350885)
 
-![预览3](https://github.com/congtaoa/fabric-mobile-h5/assets/18671378/70b9932e-5fb6-4442-92d3-00101b9daf4f)
-
-
+![预览3](https://github.com/congtaoa/fabric-mobile-h5/assets/18671378/c244d2c1-f96a-4f5d-8281-58f23d405ea8)
 
 ## 现有功能
 
