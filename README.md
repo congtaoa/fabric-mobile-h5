@@ -18,9 +18,7 @@
 
 ![预览3](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9311389a1ef4431a95557739b65c68f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=360&h=744&e=gif&f=785&b=1a1a1a)
 
-## 已有功能
-
-[功能介绍文章](https://juejin.cn/post/7222141882515128375) 文字 + 动图。
+## 现有功能
 
 *   保存为 PNG、JSON 文件
 *   读取JSON模板
